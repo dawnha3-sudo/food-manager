@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 추천 웹사이트</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f7f7f7 url('https://www.toptal.com/designers/subtlepatterns/patterns/food.png');
+            background-repeat: repeat;
+            background-size: 300px 300px;
+            margin: 0;
+            padding: 0;
+        }
+        .container { max-width: 400px; margin: 60px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 32px; text-align: center; }
+        h1 { color: #4a90e2; }
+        button { background: #4a90e2; color: #fff; border: none; padding: 12px 24px; border-radius: 6px; font-size: 1.1em; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #357abd; }
+        .menu { margin-top: 32px; font-size: 1.3em; color: #333; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>오늘 뭐 먹지?</h1>
+        <p>추천 메뉴 또는 메뉴 조합을 받아보세요!</p>
+        <button onclick="recommendMenu()">메뉴 추천받기</button>
+        <button onclick="recommendCombo()" style="margin-left:10px;">메뉴 조합 추천받기</button>
+        <div class="menu" id="menu"></div>
+        <div class="menu" id="combo"></div>
+    </div>
+    <script>
+        const menus = [
+            '김치찌개', '된장찌개', '비빔밥', '불고기', '치킨', '피자', '햄버거', '떡볶이', '라면', '초밥',
+            '파스타', '샐러드', '삼겹살', '갈비탕', '쌀국수', '우동', '돈까스', '카레', '순두부찌개', '냉면'
+        ];
+        const combos = [
+            '김치찌개 + 밥',
+            '비빔밥 + 계란후라이',
+            '불고기 + 상추쌈',
+            '치킨 + 맥주',
+            '피자 + 콜라',
+            '떡볶이 + 튀김',
+            '라면 + 김밥',
+            '초밥 + 우동',
+            '파스타 + 샐러드',
+            '삼겹살 + 쌈채소',
+            '갈비탕 + 깍두기',
+            '돈까스 + 양배추샐러드',
+            '카레 + 밥',
+            '순두부찌개 + 공깃밥',
+            '냉면 + 만두'
+        ];
+        function recommendMenu() {
+            document.getElementById('combo').textContent = '';
+            let count = 0;
+            const menuDiv = document.getElementById('menu');
+            const interval = setInterval(() => {
+                const idx = Math.floor(Math.random() * menus.length);
+                menuDiv.textContent = '추천 메뉴: ' + menus[idx];
+                count++;
+                if (count > 20) { // 약 1초 후 멈춤
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+        function recommendCombo() {
+            document.getElementById('menu').textContent = '';
+            let count = 0;
+            const comboDiv = document.getElementById('combo');
+            const interval = setInterval(() => {
+                const idx = Math.floor(Math.random() * combos.length);
+                comboDiv.textContent = '추천 메뉴 조합: ' + combos[idx];
+                count++;
+                if (count > 20) {
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+    </script>
+</body>
+</html>
